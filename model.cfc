@@ -13,7 +13,8 @@
 --->
 component output="false" accessors="true" hint="I am the base model."
 {
-  this.errors = '';
+  this.errors = ''
+  this._ = new Underscore();
 
   property name="id" type="numeric" getter="true" setter="true" default="-1";
 

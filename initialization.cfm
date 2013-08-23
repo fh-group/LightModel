@@ -29,10 +29,18 @@
   }
 
   private void function setProperty(required string property, required any value){
-    // TODO: Query the property to determine it's type.
-    // Try to cast the value to the appropriate type. If you are unable to cast
-    // throw an exception?
-    this["set#arguments.property#"](arguments.value);
+    var loc = {};
+
+    loc.propertiesList = _getPropertyNames();
+
+    if(_hasProperty(arguments.property)){
+      loc.receiverType = getMetaData(this["set#arguments.property#"]).parameters[1].type;
+      loc.senderType = getMetaData(arguments.value).getName();
+      
+      if(!(loc.senderType == 'java.lang.String' && arguments.value == '')){
+        this["set#arguments.property#"](arguments.value);
+      }
+    }
   }
 
   private struct function queryRowToStruct(required query q, numeric row = 1){
