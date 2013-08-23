@@ -20,9 +20,6 @@
       {
         if(structKeyExists(arguments, 'namespace') && arguments.namespace != '' && !arrayFindNoCase(arguments.propertyWhitelist, key)){
           new_key = ReplaceNoCase(key, arguments.namespace&'_', '');
-          writeDump("new key: "&new_key);
-          writeDump(arguments.obj[key]);
-          abort;
           setProperty(new_key, arguments.obj[key]);
         }else{
           setProperty(key, arguments.obj[key]);
