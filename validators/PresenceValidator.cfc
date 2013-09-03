@@ -3,6 +3,7 @@ component name="PresenceValidator" extends="Validator" output="false" accessors=
   variables.options = StructNew();
 
   public void function init(struct options){
+    variables.options.message = "#this.getProperty()# does not exist.";
     StructAppend(variables.options, arguments.options, true);
   }
 
@@ -15,7 +16,7 @@ component name="PresenceValidator" extends="Validator" output="false" accessors=
     if(IsDefined('propertyValue')){
       result = true;
     }else{
-      this.getTarget().errors.add(property="#this.getProperty()#", message="#this.getProperty()# does not exist.");
+      this.getTarget().errors.add(property="#this.getProperty()#", message=variables.options.message);
     }
 
     return result;

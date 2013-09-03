@@ -4,6 +4,7 @@ component name="NumericalityValidator" extends="Validator" output="false" access
 
   public void function init(struct options){
     variables.options.AllowNull = true;
+    variables.options.message = "#propertyValue# is not a valid number based on validation.";
     StructAppend(variables.options, arguments.options, true);
   }
 
@@ -35,7 +36,7 @@ component name="NumericalityValidator" extends="Validator" output="false" access
       || (StructKeyExists(variables.options, 'odd') && IsBoolean(variables.options.odd) && variables.options.odd && !BitAnd(propertyValue, 1))
       || (StructKeyExists(variables.options, 'even') && IsBoolean(variables.options.even) && variables.options.even && BitAnd(propertyValue, 1))
     ){
-      this.getTarget().errors.add(property="#this.getProperty()#", message="#propertyValue# is not a valid number based on validation.");
+      this.getTarget().errors.add(property="#this.getProperty()#", message=variables.options.message);
     }else{
       result = true;
     }

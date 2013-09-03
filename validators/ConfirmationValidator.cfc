@@ -4,6 +4,7 @@ component name="ConfirmationValidator" extends="Validator" output="false" access
 
   public void function init(struct options){
     variables.options.AllowNull = true;
+    variables.options.message = "#this.getProperty()# does not match it's confirmation.";
     StructAppend(variables.options, arguments.options, true);
   }
 
@@ -38,7 +39,7 @@ component name="ConfirmationValidator" extends="Validator" output="false" access
     result = propertyValue == confirmationPropertyValue;
 
     if(!result){
-      this.getTarget().errors.add(property="#this.getProperty()#", message="#this.getProperty()# does not match it's confirmation.");
+      this.getTarget().errors.add(property="#this.getProperty()#", message=variables.options.message);
     }
 
     return result;
