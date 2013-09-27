@@ -19,15 +19,20 @@
     variables.validators = [];
   }
 
+  // Add a validator to the validation chain.
   private void function addValidator(any validator){
     arrayAppend(variables.validators, arguments.validator);
   }
 
-  <!---
-  //
-  // Validation Methods
-  //
-  --->
+  /*
+    Validation Methods
+    Used to validate the values of properties based on certain criteria.
+    The methods below are convenience methods to add validations of certain types to the
+    validation chain.
+    TODO: Remove the checking of arguments on each method. Instead call a common method inside.
+    TODO: Remove any sort of error checking out of these methods and allow them to fail inside of
+          validation if absolutely possible.
+   */
   private void function validatesLength(string property, string comparison, struct options={}){
     var validator = '';
     var argsColl = StructNew();
@@ -92,7 +97,7 @@
     var validator = '';
 
     if((!IsDefined('arguments.property'))){ throw(type="ArgumentError", message="Property must be defined."); }
-    
+
     validator = new LightModel.validators.FormatValidator(options=arguments.options);
     validator.setTarget(this).setProperty(arguments.property);
     this.addValidator(validator);
