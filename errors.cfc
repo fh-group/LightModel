@@ -1,3 +1,6 @@
+// More a messages / alerts / errors component, but errors is where is all started.
+// TODO: Incorporate error object and append those to error array instead which would allow
+// more possible expantion of information for errors themselves versus just a message.
 component name="Errors" output="false" accessors="true" hint="I contain all of a model's errors"
 {
   // icanhas new errors?
@@ -20,7 +23,7 @@ component name="Errors" output="false" accessors="true" hint="I contain all of a
     else
       return [];
   }
- 
+
 
   // Generate HTML of all errors which prints to an errors_messages div.
   // Could easily be styled with Bootstrap.
@@ -43,6 +46,8 @@ component name="Errors" output="false" accessors="true" hint="I contain all of a
     return errorsHTML;
   }
 
+  // Take all errors messages and turn them into a single dimension array of HTML strings.
+  // Can be used to easily output messages to browser screens.
   private string function reduceMessages(messages){
     return _.reduce(
                     _.map(arguments.messages,
@@ -58,7 +63,7 @@ component name="Errors" output="false" accessors="true" hint="I contain all of a
 
   // Add an error message to a specific property.
   // TODO: Is it worth it to allow adding messages to a 'this' for entire object errors?
-  public void function add(string property, string message){   
+  public void function add(string property, string message){
     if(!isSimpleValue(arguments.message))
       throw (type="ArgumentError", message="Message must be a simple value.");
 

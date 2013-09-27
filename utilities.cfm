@@ -1,4 +1,6 @@
 <cfscript>
+  // Returns array of property structs based off what is in the getMetaData information
+  // for the current object.
   private array function _getProperties(){
     var loc = {};
     loc.metadata = getMetadata(this);
@@ -10,6 +12,8 @@
     return loc.properties;
   }
 
+  // Returns array of property names based off of what is in the getMetaData information
+  // for the current object.
   private array function _getPropertyNames(){
     var loc = {};
     loc.metadata = getMetadata(this);
@@ -23,6 +27,8 @@
     return loc.propertyNames;
   }
 
+  // Determines if the current object has a given property. Useful for knowing
+  // when setting a property is available.
   private boolean function _hasProperty(required string property){
     var loc = {};
     loc.property = arguments.property;

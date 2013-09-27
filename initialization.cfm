@@ -28,6 +28,10 @@
     }
   }
 
+  // Naively sets properties by using a given property name and a value. The method
+  // will append `set` to the front of the property and hand the value as the arguement.
+  // If the setter does not exist, it will not set the property. Really wish ColdFusion
+  // would make accessors (setters / getters) first class citizens.
   private void function setProperty(required string property, required any value){
     var loc = {};
 
@@ -36,13 +40,17 @@
     if(_hasProperty(arguments.property)){
       loc.receiverType = getMetaData(this["set#arguments.property#"]).parameters[1].type;
       loc.senderType = getMetaData(arguments.value).getName();
-      
+
       if(!(loc.senderType == 'java.lang.String' && arguments.value == '')){
         this["set#arguments.property#"](arguments.value);
       }
     }
   }
 
+  // Takes the first row in a query and turns it into a structure of
+  // properties and values. Used settings properties on objects.
+  // Returns struct of properties / values of first row of query.
+  // Columns are properties and the first row's value is the value.
   private struct function queryRowToStruct(required query q, numeric row = 1){
     var loc = {};
     loc.returnValue = {};
