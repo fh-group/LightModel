@@ -4,7 +4,7 @@ component name="NumericalityValidator" extends="Validator" output="false" access
 
   public void function init(struct options){
     variables.options.AllowNull = true;
-    variables.options.message = "#propertyValue# is not a valid number based on validation.";
+    variables.options.message = "#this.getProperty()# is not a valid number based on validation.";
     StructAppend(variables.options, arguments.options, true);
   }
 
@@ -21,7 +21,7 @@ component name="NumericalityValidator" extends="Validator" output="false" access
         return result;
       }else{
         throw(type="ArgumentError", message="#this.getProperty()# can not be null.");
-      } 
+      }
     }
 
     // Credit to CFWheels for the validation below.
